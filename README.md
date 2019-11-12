@@ -3,23 +3,14 @@
 开发工具和环境:Eclipsemars、Maven3.3.3、Tomcat7.0.79（MavenTomcatPlugin）、JDK1.7 、Mysql5.7、Nginx1.8.0、Redis3.0.0、Win10 操作系统、Linux(服务器系统)
 
 ego-parent中的pom.xml文件中添加了此project的所有依赖和版本信息
-
 ego-portal前台实现主界面显示、商品搜索功能、商品展示功能、显示购物车功能、提交订单功能、用户注册登录功能 
-
 ego-manage后台实现商品管理 
-
 ego-pojo中为数据库中表对应的实体类
-
 ego-redis中为redis中的增删改查操作
-
 ego-commons为工具类
-
 ego-item为商品操作项目
-
 ego-search为根据关键字查询商品
-
 ego-service为RPC服务中定义的接口
-
 ego-service-impl为RPC服务中实现接口方法的主类
 
 1.数据库中的表通过MyBatis逆向工程直接生成pojo类和mapper.xml文件以及接口 
