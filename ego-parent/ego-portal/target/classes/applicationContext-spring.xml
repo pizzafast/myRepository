@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
+        
+        
+    
+    <!-- 扫描注解 -->
+   <context:component-scan base-package="com.ego.*.service.impl"></context:component-scan> 
+    <!-- 加载properties文件  classpath*:*.properties 第一个*表示加载类路径下的属性文件  包括导入的jar包中的属性文件   第二个*表示所有以.properties结尾的文件-->
+   <context:property-placeholder location="classpath*:*.properties"/>
+   
+</beans>

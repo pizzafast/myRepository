@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--xmlns:mvc表示springmvc所需要的dtd   xmlns:context表示一些使用注解或者加载properties文件 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		
+	<!-- maven就是将工程成成几个项目  其他编写原理还是与ssm一致 -->
+	<!--扫描注解 -->
+	<context:component-scan base-package="com.ego.*.controller"></context:component-scan>
+	<!-- 注解驱动 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<!--配置时间转换类型的ConversionService  实现类为FormattingConversionServiceFactoryBean  -->
+	<!-- <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="registerDefaultFormatters" value="false" />
+		<property name="formatters">
+			<set>
+				<bean class="org.springframework.format.number.NumberFormatAnnotationFormatterFactory" />
+			</set>
+		</property>
+		<property name="formatterRegistrars">
+			<set>
+				<bean class="org.springframework.format.datetime.joda.JodaTimeFormatterRegistrar">
+					<property name="dateFormatter">
+						<bean class="org.springframework.format.datetime.joda.DateTimeFormatterFactoryBean">
+							<property name="pattern" value="dd/MM/yyyy" />
+						</bean>
+					</property>
+				</bean>
+			</set>
+		</property>
+	</bean> -->
+	<!--配置视图解析器  因为jsp在web-inf下  用户无法通过url直接访问  -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!--配置MultipartResolver  -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+	<!-- 静态资源加载 -->
+	<mvc:resources location="/WEB-INF/js/" mapping="/js/**"></mvc:resources>
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"></mvc:resources>
+    <mvc:resources location="/WEB-INF/images/" mapping="/images/**"></mvc:resources>
+</beans>

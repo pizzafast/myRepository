@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ego</groupId>
+    <artifactId>ego-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>ego-portal</artifactId>
+  <packaging>war</packaging>
+  <dependencies>
+  		<!--redis  -->
+  		<dependency>
+			<groupId>com.ego</groupId>
+		    <artifactId>ego-redis</artifactId>
+		</dependency>
+		<!--导入service  -->  
+		<dependency>
+			<groupId>com.ego</groupId>
+		    <artifactId>ego-service</artifactId>
+		</dependency>
+		<!-- 分页插件 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+		</dependency>
+  		<!--redis jar包  -->
+		<dependency>
+		    <groupId>redis.clients</groupId>
+		    <artifactId>jedis</artifactId>
+		</dependency>
+	  	<!-- 配置dubbo -->
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>dubbo</artifactId>
+		    <exclusions>
+		    	<!--<exclusion>标签为了把依赖的包换成其他版本  -->
+		    	<exclusion>
+		    		<groupId>org.springframework</groupId>
+		    		<artifactId>spring</artifactId>
+		    	</exclusion>
+		    </exclusions>
+		</dependency>
+	  	<!--访问zookeeper客户端的jar包  -->
+		<dependency>
+		    <groupId>com.101tec</groupId>
+		    <artifactId>zkclient</artifactId>
+		</dependency>
+  		<!--导入javaee需要的包 -->
+  		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <!--<scope> jar 有效范围 provided 表示编译期生效,不会打包发布到 tomcat 中  这里的配置是为了编译时的使用 -->
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet.jsp</groupId>
+		    <artifactId>jsp-api</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<!--导入spring jar包  
+			只导入spring-webmvc jar包时  maven会自动在中央仓库或者在本地仓库中获取它所依赖的包    
+			spring-webmvc需要依赖的包为spring-beans、spring-context 、spring-core、spring-expression、spring-web
+			这些依赖包也彼此依赖也依赖其他包  会自动在本地仓库获取
+			ContextLoaderListener类和CharacterEncodingFilter类在spring-web jar包中
+			DispatcherServlet类在spring-webmvc jar包中
+			web.xml中配置的类基本上都在web开头的包中
+			-->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!-- 日志 jar包 -->
+		<dependency>
+		    <groupId>log4j</groupId>
+		    <artifactId>log4j</artifactId>
+		</dependency>
+		<!--jackson 即使用json时需要的包 
+			jackson-databind jar包 依赖于jackson-core jar包  和jackson-annotations jar包
+		 -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!--commons-fileupload jar包    图片上传时使用 
+			commons-fileupload jar包依赖于commons-io  jar包 其为使用输入输出流的工具包
+		-->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<port>8082</port>
+					<path>/</path>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

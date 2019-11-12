@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.ego</groupId>
+    <artifactId>ego-parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>ego-commons</artifactId>
+  <dependencies>
+  		<!--导入pojo包  -->
+  		<dependency>
+  			<groupId>com.ego</groupId>
+    		<artifactId>ego-pojo</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+  		</dependency>
+  		<!--导入连接ftpclient的jar包   即连接vsftpd
+	  	java技术,通过使用 FtpClient实现        通过java 代码上传文件到 vsftpd 服务-->
+		<dependency>
+		    <groupId>commons-net</groupId>
+		    <artifactId>commons-net</artifactId>
+		</dependency>
+		<!--jackson 即使用json时需要的包 
+			jackson-databind jar包 依赖于jackson-core jar包  和jackson-annotations jar包
+		 -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!--httpclient导入跨域需要jar包  -->
+		<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+		</dependency>
+  </dependencies>
+</project>

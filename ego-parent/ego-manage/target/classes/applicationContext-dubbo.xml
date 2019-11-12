@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://code.alibabatech.com/schema/dubbo 
+		http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+	<!-- 扫描注解 -->
+	<dubbo:annotation package="com.ego.manage.service.impl"/><!--主要为了扫描@reference  -->		
+	<!--<dubbo:application/> 给provider起名,在monitor或管理工具中区别是哪个provider  -->
+	<dubbo:application name="dubbo-manage"/>
+	<!--<dubbo:registry/> 配置注册中心   address:注册中心的ip和端口   protocol使用哪种注册中心  -->
+	<dubbo:registry address="192.168.87.129:2181" protocol="zookeeper"></dubbo:registry>
+</beans>

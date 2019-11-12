@@ -1,0 +1,240 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ego</groupId>
+  <artifactId>ego-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+		<servlet-version>3.0.1</servlet-version>
+  		<jsp-version>2.2</jsp-version>
+  		<jstl-version>1.2</jstl-version>
+  		<spring-version>4.1.6.RELEASE</spring-version>
+  		<aspectjweaver-version>1.8.6</aspectjweaver-version>
+  		<mybatis-version>3.2.7</mybatis-version>
+  		<mybatis-spring-version>1.2.3</mybatis-spring-version>
+  		<log4j-version>1.2.17</log4j-version>
+  		<mysql-connector-java-version>5.1.38</mysql-connector-java-version>
+  		<jackson-version>2.4.1</jackson-version>
+  		<commons-fileupload-version>1.3.1</commons-fileupload-version>
+  		<tomcat7-maven-plugin-version>2.2</tomcat7-maven-plugin-version>
+  		<jedis-version>2.8.1</jedis-version>
+  		<dubbo-version>2.5.3</dubbo-version>
+  		<zkclient-version>0.10</zkclient-version>
+  		<commons-net-version>3.3</commons-net-version>
+		<pagehelper-version>4.1.6</pagehelper-version>
+		<solrj-version>5.3.1</solrj-version>
+		<httpclient-version>4.4.1</httpclient-version>
+		<myredis-version>0.0.1-SNAPSHOT</myredis-version>
+		<myservice-version>0.0.1-SNAPSHOT</myservice-version>
+   </properties>
+   <dependencyManagement>
+		<dependencies>
+			<!--导入service  -->  
+			<dependency>
+				<groupId>com.ego</groupId>
+			    <artifactId>ego-service</artifactId>
+			    <version>${myservice-version}</version>
+			</dependency>
+			<!-- redis 依赖 --> 
+			<dependency>
+				<groupId>com.ego</groupId>
+				<artifactId>ego-redis</artifactId>
+				<version>${myredis-version}</version>
+			</dependency>
+			<!-- 由 apache 推出的实现使用 java 代码完成请求/响应的一套 API  
+				模拟浏览器发送请求及解析响应内容  类似于jsonp
+			-->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient-version}</version> 
+			</dependency>
+			<!--solrj jar包   数据库的数据传送到solr上时需要的 -->
+			<dependency>
+				<groupId>org.apache.solr</groupId>
+				<artifactId>solr-solrj</artifactId>
+				<version>${solrj-version}</version>
+			</dependency>
+			
+			<!-- 导入分页插件jar包 -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pagehelper-version}</version>
+			</dependency>
+			<!--导入连接ftpclient的jar包   即连接vsftpd
+		  	java技术,通过使用 FtpClient实现        通过java 代码上传文件到 vsftpd 服务-->
+			<dependency>
+			    <groupId>commons-net</groupId>
+			    <artifactId>commons-net</artifactId>
+			    <version>${commons-net-version}</version>
+			</dependency>
+	  		<!--redis jar包  -->
+			<dependency>
+			    <groupId>redis.clients</groupId>
+			    <artifactId>jedis</artifactId>
+			    <version>${jedis-version}</version>
+			</dependency>
+		  	<!-- 配置dubbo -->
+			<dependency>
+			    <groupId>com.alibaba</groupId>
+			    <artifactId>dubbo</artifactId>
+			    <version>${dubbo-version}</version>
+			    <exclusions>
+			    	<!--<exclusion>标签为了把依赖的包换成其他版本  -->
+			    	<exclusion>
+			    		<groupId>org.springframework</groupId>
+			    		<artifactId>spring</artifactId>
+			    	</exclusion>
+			    </exclusions>
+			</dependency>
+		  	<!--访问zookeeper客户端的jar包  -->
+			<dependency>
+			    <groupId>com.101tec</groupId>
+			    <artifactId>zkclient</artifactId>
+			    <version>${zkclient-version}</version>
+			</dependency>
+	  		<!--导入javaee需要的包 -->
+	  		<dependency>
+			    <groupId>javax.servlet</groupId>
+			    <artifactId>javax.servlet-api</artifactId>
+			    <version>${servlet-version}</version>
+			    <!--<scope> jar 有效范围 provided 表示编译期生效,不会打包发布到 tomcat 中  这里的配置是为了编译时的使用 -->
+			    <scope>provided</scope>
+			</dependency>
+			<dependency>
+			    <groupId>javax.servlet.jsp</groupId>
+			    <artifactId>jsp-api</artifactId>
+			    <version>${jsp-version}</version>
+			    <scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>jstl</groupId>
+				<artifactId>jstl</artifactId>
+				<version>${jstl-version}</version>
+			</dependency>
+			<!--导入spring jar包  
+				只导入spring-webmvc jar包时  maven会自动在中央仓库或者在本地仓库中获取它所依赖的包    
+				spring-webmvc需要依赖的包为spring-beans、spring-context 、spring-core、spring-expression、spring-web
+				这些依赖包也彼此依赖也依赖其他包  会自动在本地仓库获取
+				ContextLoaderListener类和CharacterEncodingFilter类在spring-web jar包中
+				DispatcherServlet类在spring-webmvc jar包中
+				web.xml中配置的类基本上都在web开头的包中
+				-->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-webmvc</artifactId>
+			    <version>${spring-version}</version>
+			</dependency>
+			<!--导入spring-jdbc jar包  也是spring中的jar包
+				dataSource类  DataSourceTransactionManager类都在这个jar包中
+			-->
+			<dependency>
+			    <groupId>org.springframework</groupId>
+			    <artifactId>spring-jdbc</artifactId>
+			    <version>${spring-version}</version>
+			</dependency>
+			<!--导入aspectjweaver jar包   配置aop时如果applicationcontext.xml使用aspectJ方式配置aop需要使用这个包-->
+			<dependency>
+			    <groupId>org.aspectj</groupId>
+			    <artifactId>aspectjweaver</artifactId>
+			    <version>${aspectjweaver-version}</version>
+			</dependency>
+			<!--mybatis jar包  mybatis框架需要使用的jar包-->
+			<dependency>
+			    <groupId>org.mybatis</groupId>
+			    <artifactId>mybatis</artifactId>
+			    <version>${mybatis-version}</version>
+			</dependency>
+			<!--mybatis 与spring的整合jar包  
+				SqlSessionFactoryBean类和  MapperScannerConfigurer都在这个整合包中-->
+			<dependency>
+			    <groupId>org.mybatis</groupId>
+			    <artifactId>mybatis-spring</artifactId>
+			    <version>${mybatis-spring-version}</version>
+			</dependency>
+			<!-- 日志 jar包 -->
+			<dependency>
+			    <groupId>log4j</groupId>
+			    <artifactId>log4j</artifactId>
+			    <version>${log4j-version}</version>
+			</dependency>
+			<!--mysql数据库驱动 -->
+			<dependency>
+			    <groupId>mysql</groupId>
+			    <artifactId>mysql-connector-java</artifactId>
+			    <version>${mysql-connector-java-version}</version>
+			</dependency>
+			<!--jackson 即使用json时需要的包 
+				jackson-databind jar包 依赖于jackson-core jar包  和jackson-annotations jar包
+			 -->
+			<dependency>
+			    <groupId>com.fasterxml.jackson.core</groupId>
+			    <artifactId>jackson-databind</artifactId>
+			    <version>${jackson-version}</version>
+			</dependency>
+			<!--commons-fileupload jar包    图片上传时使用 
+				commons-fileupload jar包依赖于commons-io  jar包 其为使用输入输出流的工具包
+			-->
+			<dependency>
+			    <groupId>commons-fileupload</groupId>
+			    <artifactId>commons-fileupload</artifactId>
+			    <version>${commons-fileupload-version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<build>
+		<resources>
+			<!--在服务器执行时src/main/java下只有.java文件会被编译  .xml文件不会编译
+				所以需要使用另一个插件resource
+				maven 默认只把 src/main/resources 里面的非.java 文件进行编译到classes中
+				如果希望 src/main/java 下的文件也被编辑到 classes 中,在 pom.xml中配置-->
+				
+			<!--一个目录一个resource标签  一种文件一个include标签  -->
+			<resource>
+				<directory>src/main/java</directory>
+				<!--**/*.xml表示<directory>标签下赋值的目录下的所有.xml文件以及子级.xml文件  -->
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<!--**/*.xml表示<directory>标签下赋值的目录下的所有.xml文件以及子级.xml文件  
+						**/*.properties表示<directory>标签下赋值的目录下的所有.properties文件以及子级.properties文件-->
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<version>${tomcat7-maven-plugin-version}</version>
+					<configuration>
+						<!-- 控制 tomcat 端口号 -->
+						<port>8080</port>
+						<!-- 项目发布到 tomcat 后的名称 -->
+						<!-- / 相当于把项目发布名称为 ROOT -->
+						<!-- /hot 相当于把项目发布名称为 abc即项目部署名-->
+						<path>/</path>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+	<modules>
+		<module>ego-pojo</module>
+		<module>ego-commons</module>
+		<module>ego-service</module>
+		<module>ego-manage</module>
+		<module>ego-service-impl</module>
+		<module>ego-portal</module>
+		<module>ego-item</module>
+		<module>ego-redis</module>
+		<module>ego-search</module>
+	</modules>
+</project>

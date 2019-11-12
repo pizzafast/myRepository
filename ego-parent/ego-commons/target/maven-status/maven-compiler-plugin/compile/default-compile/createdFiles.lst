@@ -1,0 +1,5 @@
+com\ego\commons\pojo\EasyUIDataGrid.class
+com\ego\commons\pojo\EasyUiTree.class
+com\ego\commons\utils\IDUtils.class
+com\ego\commons\pojo\EgoResult.class
+com\ego\commons\utils\FtpUtil.class
