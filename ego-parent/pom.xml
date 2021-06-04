@@ -23,7 +23,7 @@
   		<commons-net-version>3.3</commons-net-version>
 		<pagehelper-version>4.1.6</pagehelper-version>
 		<solrj-version>5.3.1</solrj-version>
-		<httpclient-version>4.4.1</httpclient-version>
+		<httpclient-version>4.5.13</httpclient-version>
 		<myredis-version>0.0.1-SNAPSHOT</myredis-version>
 		<myservice-version>0.0.1-SNAPSHOT</myservice-version>
    </properties>
